@@ -43,8 +43,7 @@ from sklearn.model_selection import train_test_split
 # Import StandardScaler to normalize feature values before PCA.
 from sklearn.preprocessing import StandardScaler
 
-# Import KNeighborsClassifier as the classifier after Eigenfaces projection.
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
 
 # Import accuracy_score to evaluate the recognition result.
 from sklearn.metrics import accuracy_score
@@ -591,7 +590,7 @@ def run_eigenfaces_recognition(X, y):
     # Transform the test set using the training scaler.
     X_test_scaled = scaler.transform(X_test)
 
-    # Choose the number of principal components.
+    # Choose the number of principal components for Eigenfaces.
     n_components = min(80, X_train_scaled.shape[0], X_train_scaled.shape[1])
 
     # Create the PCA model for Eigenfaces.
@@ -604,7 +603,7 @@ def run_eigenfaces_recognition(X, y):
     X_test_eigenfaces = pca.transform(X_test_scaled)
 
     # Create the classifier.
-    classifier = KNeighborsClassifier(n_neighbors=3)
+    classifier = SVC(kernel="rbf", class_weight="balanced", random_state=42)
 
     # Train the classifier using training data only.
     classifier.fit(X_train_eigenfaces, y_train)
