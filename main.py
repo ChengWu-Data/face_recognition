@@ -91,7 +91,7 @@ def find_matching_folder(dataset_path, target_name):
     """
     Find a folder whose normalized name matches the requested label.
     """
-   # Normalize names first so small folder naming differences do not break matching
+    # Normalize names first so small folder naming differences do not break matching
     normalized_target = normalize_text(target_name)
     all_subfolders = list_subfolders(dataset_path)
 
@@ -246,7 +246,7 @@ def validate_required_classes(dataset_path):
             f"Required cropped folder '{ARIEL_OUTPUT_FOLDER}' was not found inside '{dataset_path}'."
         )
 
-   # Use the cropped Ariel Sharon folder for recognition instead of the raw images
+    # Use the cropped Ariel Sharon folder for recognition instead of the raw images
    class_folder_mapping["ariel_sharon"] = ARIEL_OUTPUT_FOLDER
 
     for class_label in REQUIRED_CLASSES:
